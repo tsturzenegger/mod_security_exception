@@ -77,7 +77,6 @@ def run():
         for location in item.copy():
             itemdict[location] = itemdict.setdefault(location, 0) + 1
             if itemdict[location] >= int(directoryThreshold):
-                print 'jetzt'
                 print '<LocationMatch "' + location \
                     + '''">
   SecRuleEngine Off
@@ -101,7 +100,6 @@ def run():
                 + '\n</LocationMatch>'
         else:
             print 'SecRuleRemoveById ' + item
-
 
 def usage():
     print '''
