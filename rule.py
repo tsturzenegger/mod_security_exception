@@ -63,12 +63,12 @@ def run(sourceFile=None, ip=None, ruleThreshold=3):
         if len(ruleDict.get(item)) == 1:
 	    print '<LocationMatch "' + next(iter(ruleDict.get(item))) + '">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
         elif ruleThreshold > len(ruleDict.get(item)):
-	    sys.stdout.write('<LocationMatch "')
+	    sys.stdout.write('<LocationMatch "(')
             for location in ruleDict.get(item):
                 sys.stdout.write(location + '|')
-            print '">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
+            print ')">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
 	else:
-            print '<LocationMatch ".*">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
+            print 'SecRuleRemoveById ' + item
 
 def usage():
     print '''
