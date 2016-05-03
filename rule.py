@@ -59,6 +59,15 @@ def run(sourceFile=None, ip=None, ruleThreshold=3):
             line = f.readline()
 
     # --- Generate Rule List  ---
+    itemdict = dict()
+    for item in ruleDict.values():
+        for location in item.copy():
+            itemdict[location] = itemdict.setdefault(location, 0) + 1
+            if itemdict[location] >=5:
+               print '<LocationMatch "' + location + '">\n  SecRuleEngine Off\n</LocationMatch>'
+               for item in ruleDict:
+                   ruleDict[item].discard(location)
+
     for item in ruleDict:
 	locations = ruleDict.get(item)
         if len(locations) == 1:
