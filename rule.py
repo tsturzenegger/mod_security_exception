@@ -60,11 +60,12 @@ def run(sourceFile=None, ip=None, ruleThreshold=3):
 
     # --- Generate Rule List  ---
     for item in ruleDict:
-        if len(ruleDict.get(item)) == 1:
-	    print '<LocationMatch "' + next(iter(ruleDict.get(item))) + '">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
-        elif ruleThreshold > len(ruleDict.get(item)):
+	locations = ruleDict.get(item)
+        if len(locations) == 1:
+	    print '<LocationMatch "' + next(iter(locations)) + '">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
+        elif ruleThreshold > len(locations):
 	    sys.stdout.write('<LocationMatch "(')
-            for location in ruleDict.get(item):
+            for location in locations:
                 sys.stdout.write(location + '|')
             print ')">' + '\n  ' + 'SecRuleRemoveById ' + item + '\n</LocationMatch>'
 	else:
