@@ -81,8 +81,10 @@ def run():
                     + '''">
   SecRuleEngine Off
 </LocationMatch>'''
-                for item in ruleDict:
+                for item in ruleDict.copy():
                     ruleDict[item].discard(location)
+                    if len(ruleDict[item]) == 0:
+                        del ruleDict[item] #Delete empty rules
 
     # Now all other rules
 
